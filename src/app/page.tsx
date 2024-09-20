@@ -20,7 +20,7 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <AppointmentForm onAddAppointment={addAppointment} />
         <AppointmentList appointments={appointments} />
-        <Calendar onSelectDate={setSelectedDate} />
+        <Calendar/>
       </div>
     </main>
   );
