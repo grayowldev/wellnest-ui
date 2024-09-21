@@ -7,7 +7,7 @@ import Calendar, { generateDate } from './components/Calendar';
 
 export default function Home() {
   const [appointments, setAppointments] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
 
   const addAppointment = (newAppointment) => {
     setAppointments([...appointments, { ...newAppointment, id: Date.now() }]);
