@@ -1,83 +1,94 @@
+'use client'
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import Calendar from "@/app/components/Calendar";
+import {useState} from "react";
 
 export const BookingForm = () => {
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [availableDates, setAvailableDates] = useState([
+        {
+            month: 8,
+            days: 5,
+            year: 2024,
+            time: []
+        },
+        {
+            month: 8,
+            days: 13,
+            year: 2024,
+            time: []
+        },
+        {
+            month: 8,
+            days: 16,
+            year: 2024,
+            time: []
+        },
+        {
+            month: 8,
+            days: 17,
+            year: 2024,
+            time: []
+        },
+        {
+            month: 8,
+            days: 18,
+            year: 2024,
+            time: [
+                {
+                    h: 7,
+                    m: 30
+                },
+                {
+                    h: 8,
+                    m: 0
+                },
+                {
+                    h: 8,
+                    m: 30
+                },
+                {
+                    h: 9,
+                    m: 0
+                }
+            ]
+        },
+        {
+            month: 8,
+            days: 19,
+            year: 2024,
+            time: []
+        }
+    ]);
+
     return (
         <div className={`w-full`}>
             <form>
-                {/*<Card>*/}
-                {/*    <CardHeader className={`space-y-1`}>*/}
-                {/*        <CardTitle className={`text-3xl font-bold`}> Booking</CardTitle>*/}
-                {/*        <CardDescription>*/}
-                {/*            Enter your booking details*/}
-                {/*        </CardDescription>*/}
-                {/*    </CardHeader>*/}
-                {/*    <CardContent className={`space-y-4`}>*/}
-                {/*        <div className={`space-y-2`}>*/}
-                {/*            <Label htmlFor={`name`}> Name</Label>*/}
-                {/*            <Input*/}
-                {/*                id={`name`}*/}
-                {/*                type={`text`}*/}
-                {/*                placeholder={`Enter your name`}*/}
-                {/*                name={`name`}*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className={`space-y-2`}>*/}
-                {/*            <Label htmlFor={`email`}> Email</Label>*/}
-                {/*            <Input*/}
-                {/*                id={`email`}*/}
-                {/*                type={`email`}*/}
-                {/*                placeholder={`Enter your email`}*/}
-                {/*                name={`email`}*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className={`space-y-2`}>*/}
-                {/*            <Label htmlFor={`phone`}> Phone</Label>*/}
-                {/*            <Input*/}
-                {/*                id={`phone`}*/}
-                {/*                type={`text`}*/}
-                {/*                placeholder={`Enter your phone`}*/}
-                {/*                name={`phone`}*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className={`space-y-2`}>*/}
-                {/*            <Label htmlFor={`date`}> Date</Label>*/}
-                {/*            <Input*/}
-                {/*                id={`date`}*/}
-                {/*                type={`date`}*/}
-                {/*                placeholder={`Enter your date`}*/}
-                {/*                name={`date`}*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className={`space-y-2`}>*/}
-                {/*            <Label htmlFor={`time`}> Time</Label>*/}
-                {/*            <Input*/}
-                {/*                id={`time`}*/}
-                {/*                type={`time`}*/}
-                {/*                placeholder={`Enter your time`}*/}
-                {/*                name={`time`}*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*    </CardContent>*/}
-                {/*    <CardFooter>*/}
-                {/*        <button type={`submit`}>Submit</button>*/}
-                {/*    </CardFooter>*/}
-                {/*</Card>*/}
-                <div className={`grid grid-cols-2 md:grid-cols-2 gap-4`}>
-                    <div className={`border-2 p-2 rounded-2xl mt-3 w-full`}>
-                        <Calendar />
-                    </div>
-                    <div>
-                        <div className={`flex border-2 p-5 rounded-2xl mt-3 justify-center`}>
-                            7:30 am
+                <div className={`w-fit`}>
+                    <h1>Date: {selectedDate?.toDate().toDateString()}</h1>
+                    <div className={`grid grid-cols-2 md:grid-cols-2 gap-4`}>
+                        <div className={`border-2 p-2 rounded-2xl mt-3 w-full`}>
+                            <Calendar
+                                setSelectedDate={setSelectedDate}
+                                availableDates={availableDates}
+                            />
                         </div>
-                        <div className={`flex border-2 p-5 rounded-2xl mt-3 justify-center`}>
-                            8:00 am
+                        <div>
+                            {availableDates?.find(d => d.year === selectedDate?.year() && d.month === selectedDate?.month() && d.days === selectedDate?.date())?.time?.map((time, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`flex border-2 p-5 rounded-2xl mt-3 justify-center`}>
+                                        {time.h}:{time.m.toString().padStart(2, '0')} {time.h < 12 ? 'am' : 'pm'}
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
+
 
             </form>
         </div>
