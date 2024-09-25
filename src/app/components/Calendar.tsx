@@ -5,8 +5,47 @@ import {cn} from "@/app/components/cn";
 import {log} from "util";
 
 
+
+
+const Calendar = ({availableDates, setSelectedDate}) => {
+   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+  return (
+    <div className='w-96 h-96 grid grid-cols-7 text-sm'>
+        {days.map((day, index) => {
+            return (
+                <div key={index}>
+                    <h1 className={`h-14 grid place-content-center`}>{day}</h1>
+                </div>
+            )
+        })}
+        {generateDate().map(({date, isCurrentMonth, today}, index) => {
+            // console.log("date:", date.now())
+            const isAvailable = availableDates?.find(d => d.year === date.year() &&
+                d.month === date.month() &&
+                d.days === date.date())
+            return (
+                <div
+                    key={index}
+                    className={`h-14 border-t grid place-content-center`}
+                    onClick={() => {
+                        isAvailable && setSelectedDate(date)
+                    }}>
+                    <h1 className={cn(
+                        isCurrentMonth ? "": "text-gray-400",
+                        today ? "bg-blue-600 text-white" : "",
+                        isAvailable ? "bg-gray-200" : "",
+                        "h-10 w-10 rounded-full grid place-content-center hover:bg-black hover:text-white transition-all cursor-pointer"
+                    )}>{date.date()}</h1>
+                </div>
+            )
+        })}
+    </div>
+  );
+};
+
 export const generateDate = (
-    month = dayjs().month(), 
+    month = dayjs().month(),
     year = dayjs().year()
 ) => {
     const firstDayOfMonth = dayjs().year(year).month(month).startOf("month")
@@ -14,7 +53,7 @@ export const generateDate = (
     const dates = []
 
     let i = 0
-    
+
     while (i < firstDayOfMonth.day()) {
         dates.push(
             {
@@ -31,7 +70,7 @@ export const generateDate = (
             date: firstDayOfMonth.date(i),
             isCurrentMonth: true,
             today: firstDayOfMonth.date(i).toDate().toDateString() === dayjs().toDate().toDateString(),
-    })
+        })
         i++;
     }
 
@@ -42,50 +81,16 @@ export const generateDate = (
         dates.push({
             date: lastDayOfMonth.date(i),
             isCurrentMonth: false
-    })
+        })
         i++;
     }
 
-    
+
 
 
     return dates;
-    
+
 
 }
-
-interface CalendarProps {
-  onSelectDate: (date: Date) => void;
-}
-
-const Calendar = () => {
-
-  console.log( generateDate() );
-   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-
-  return (
-    <div className='w-96 h-96 grid grid-cols-7 text-sm'>
-        {days.map((day, index) => {
-            return (
-                <div key={index}>
-                    <h1 className={`h-14 grid place-content-center`}>{day}</h1>
-                </div>
-            )
-        })}
-        {generateDate().map(({date, isCurrentMonth, today}, index) => {
-            return (
-                <div key={index} className={`h-14 border-t grid place-content-center`}>
-                    <h1 className={cn(
-                        isCurrentMonth ? "": "text-gray-400",
-                        today ? "bg-blue-600 text-white" : "",
-                        "h-10 w-10 rounded-full grid place-content-center hover:bg-black hover:text-white transition-all cursor-pointer"
-                    )}>{date.date()}</h1>
-                </div>
-            )
-        })}
-    </div>
-  );
-};
 
 export default Calendar;
