@@ -1,8 +1,5 @@
-export const Signup = () => {
-    return (
-        <div>
-            Signup
+import {SignupForm} from "@/app/components/forms/SignupForm";
 
-        </div>
-    )
+export const Signup = () => {
+    return <SignupForm />
 }
