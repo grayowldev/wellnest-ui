@@ -8,10 +8,6 @@ export const AppointmentCard = ({meetingInfo}) => {
                 <h4>End</h4>
                 <p>{meetingInfo.start_time}</p>
                 <p className={``}>{meetingInfo.end_time}</p>
-                {/*<div>*/}
-                {/*    <h4></h4>*/}
-                {/*    <p></p>*/}
-                {/*</div>*/}
             </div>
             <div className={` ml-12 pl-4`}>
                 <div>
@@ -19,27 +15,7 @@ export const AppointmentCard = ({meetingInfo}) => {
                     <h3 className={`font-bold text-2xl`}>{meetingInfo.subject}</h3>
                     <p>30 minutes</p>
                 </div>
-                {/*<div>*/}
-                {/*    <h6>Location</h6>*/}
-                {/*    <p className={`font-bold text-lg`}>Zoom Link</p>*/}
-                {/*</div>*/}
 
-                {/*<div>*/}
-                {/*    <h6>Doctor</h6>*/}
-                {/*    <p>Dr. Doc Doc</p>*/}
-                {/*</div>*/}
-
-                {/*<div>*/}
-                {/*    <h6>Notes</h6>*/}
-                {/*    <p className={`font-bold text-lg`}>sample notes</p>*/}
-                {/*</div>*/}
-
-                {/*<p>Date created</p>*/}
-                {/*<div>*/}
-                {/*    <button>Reschedule</button>*/}
-                {/*    <button>Cancel</button>*/}
-                {/*    <button>Join Meeting</button>*/}
-                {/*</div>*/}
 
 
             </div>
