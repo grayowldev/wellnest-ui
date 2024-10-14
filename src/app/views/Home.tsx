@@ -5,7 +5,6 @@ import AppointmentList from '../components/AppointmentList';
 import AppointmentForm  from '../components/AppointmentForm';
 import Calendar from '../components/Calendar';
 import {BookingForm} from "@/app/components/forms/BookingForm";
-import {AppointmentCard} from "@/app/components/AppointmentCard";
 
 
 

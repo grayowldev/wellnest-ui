@@ -15,9 +15,6 @@ export const AppointmentCard = ({meetingInfo}) => {
                     <h3 className={`font-bold text-2xl`}>{meetingInfo.subject}</h3>
                     <p>30 minutes</p>
                 </div>
-
-
-
             </div>
         </div>
     )
